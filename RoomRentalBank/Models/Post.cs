@@ -8,6 +8,7 @@ namespace RoomRentalBank.Models
     [Table("Posts")]
     public class Post
     {
+        [Key]
         public int PostId { get; set; }
         public int UserId { get; set; }
         public required string Address { get; set; }

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RoomRentalBank.Models
 {
+    [Table("Users")]
     public class User
     {
         public int UserId { get; set; }

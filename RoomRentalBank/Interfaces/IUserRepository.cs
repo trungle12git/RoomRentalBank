@@ -10,13 +10,13 @@ namespace RoomRentalBank.Interfaces
 
         //Dang ky
         Task<bool> IsUsernameExistAsync(string username);
-        Task RegisterAsync(User user);
+        Task<bool> RegisterAsync(User user);
 
         //Quan ly tai khoan
         Task<User?> GetUserByIdAsync(int userId);
         Task<User?> GetUserByNameAsync(string username);
-        Task UpdateUserAsync(User user);
+        Task<bool> UpdateUserAsync(User user);
         Task ChangePasswordAsync(int userId, string newPassword);
-        Task DeleteUserAsync(int userId);
+        Task<bool> DeleteUserAsync(int userId);
     }
 }

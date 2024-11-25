@@ -1,5 +1,6 @@
 ﻿using RoomRentalBank.Models;
 using RoomRentalBank.Interfaces;
+using RoomRentalBank.ViewModels;
 
 namespace RoomRentalBank.Services
 {
@@ -19,12 +20,15 @@ namespace RoomRentalBank.Services
         }
 
         //Dang ky
-        public async Task<string?> RegisterAsync(User user)
+        public async Task<bool> RegisterAsync(UserRegisterViewModel registerModel)
         {
-            if (await _userRepository.IsUsernameExistAsync(user.Username)) return "Username da ton tai";
-            await _userRepository.RegisterAsync(user);
-
-            return "Dang ky thanh cong";
+            var user = new User
+            {
+                Username = registerModel.Username,
+                Password = registerModel.Password,
+                PhoneNumber = registerModel.PhoneNumber
+            };
+            return await _userRepository.RegisterAsync(user);
         }
 
         //Quan ly tai khoan
@@ -38,16 +42,16 @@ namespace RoomRentalBank.Services
             return await _userRepository.GetUserByNameAsync(username);
         }
 
-        public async Task<bool> UpdateUserAsync(User user)
+        public async Task<bool> UpdateUserAsync(int userId, UserUpdateViewModel updateModel)
         {
-            var existingUser = await _userRepository.GetUserByIdAsync(user.UserId);
-            if (existingUser == null) return false;
+            var user = await _userRepository.GetUserByIdAsync(userId);
+            if (user == null) return false;
 
-            existingUser.Username = user.Username;
-            existingUser.PhoneNumber = user.PhoneNumber;
+            user.Username = updateModel.Username;
+            
+            user.PhoneNumber = updateModel.PhoneNumber;
 
-            await _userRepository.UpdateUserAsync(existingUser);                        
-            return true;
+            return await _userRepository.UpdateUserAsync(user);
         }
 
         public async Task<bool> ChangePasswordAsync(int userId, string oldPassword, string newPassword)
@@ -61,10 +65,7 @@ namespace RoomRentalBank.Services
 
         public async Task<bool> DeleteUserAsync(int userId)
         {
-            if (await _userRepository.IsUserExistAsync(userId)) return false;
-            
-            await _userRepository.DeleteUserAsync(userId);
-            return true;
+            return await _userRepository.DeleteUserAsync(userId);
         }
     }
 }

@@ -31,14 +31,16 @@ namespace RoomRentalBank.Repositories
             }
         }
 
-        public async Task DeleteUserAsync(int userId)
+        public async Task<bool> DeleteUserAsync(int userId)
         {
             var user = await GetUserByIdAsync(userId);
             if (user != null)
             {
                 _context.Users.Remove(user);
                 await _context.SaveChangesAsync();
+                return true;
             }
+            return false;
         }
 
         public async Task<User?> GetUserByIdAsync(int userId)
@@ -62,16 +64,18 @@ namespace RoomRentalBank.Repositories
             return await _context.Users.AnyAsync(u => u.Username == username);
         }
 
-        public async Task RegisterAsync(User user)
+        public async Task<bool> RegisterAsync(User user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            return true;
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<bool> UpdateUserAsync(User user)
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

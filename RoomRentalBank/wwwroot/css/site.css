@@ -1,15 +1,61 @@
+﻿/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+	text-decoration: none;
+}
+
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+  font-size: 62.5%;
 }
 
 html {
@@ -17,6 +63,72 @@ html {
   min-height: 100%;
 }
 
+
 body {
-  margin-bottom: 60px;
+	font-family: Arial, sans-serif;
+}
+
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 1.6rem;
+	padding: 2rem;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	background-color: white;
+}
+
+.title h1 {
+	font-weight: bold;
+	font-size: 2rem;
+	color: #004c72;
+	margin: 0;
+}
+
+.buttons {
+	display: flex;
+	gap: 1rem;
+}
+
+.login-btn, .post-btn {
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-btn {
+	background-color: #007bff;
+	color: white;
+}
+
+.post-btn {
+	background-color: #28a745; 
+	color: white;
+}
+
+.login-btn:hover {
+	background-color: #0056b3; /* Đậm hơn khi hover */
+	
+}
+
+.post-btn:hover {
+	background-color: #218838; /* Đậm hơn khi hover */
+	
+}
+
+.post-btn a.create-post {
+    color: white;  /* Đảm bảo rằng nếu <a> nằm trong <button>, chữ vẫn trắng */
+}
+
+.footer {
+	background-color: white;
+	
 }

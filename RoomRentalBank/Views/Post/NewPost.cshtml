@@ -1,1 +1,90 @@
-﻿
+﻿@model Post
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngân hàng nhà trọ</title>
+    <link href="~/css/post.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h2 class="create-post-title">Cung cấp thông tin nhà trọ</h2>
+
+    <form id="postForm">
+        <div>
+            <label for="address">Địa chỉ:</label>
+            <input type="text" id="address" name="Address" required />
+        </div>
+
+        <div>
+            <label for="price">Giá phòng:</label>
+            <input type="number" id="price" name="Price" required />
+        </div>
+
+        <div>
+            <label for="description">Mô tả:</label>
+            <textarea id="description" name="Description" required></textarea>
+        </div>
+
+        <div>
+            <label for="area">Diện tích :</label>
+            <input type="number" id="area" name="Area" required />
+        </div>
+
+        <div>
+            <label for="imageUrls">Ảnh :</label>
+            <input type="text" id="imageUrls" name="ImageUrls" />
+        </div>
+
+        <button type="submit" class="submit">Đăng tin</button>
+    </form>
+
+    <!-- Thông báo -->
+    <div id="successMessage" style="display:none; color: green;">Thêm bài đăng thành công!</div>
+    <div id="errorMessage" style="display:none; color: red;">Có lỗi xảy ra. Vui lòng thử lại!</div>
+</body>
+</html>
+
+<script>
+    document.getElementById("postForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Ngăn chặn form gửi đi mặc định.
+
+        const postData = {
+            Address: document.getElementById("address").value,
+            Price: parseFloat(document.getElementById("price").value),
+            Description: document.getElementById("description").value,
+            Area: parseFloat(document.getElementById("area").value),
+            ImageUrls: document.getElementById("imageUrls").value
+        };
+
+        fetch('/Post/NewPostAsync', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData) // Serialize object thành JSON
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById("successMessage").innerText = data.message;
+                    document.getElementById("successMessage").style.display = "block";
+                    document.getElementById("errorMessage").style.display = "none";
+                    document.getElementById("postForm").reset();
+                } else {
+                    document.getElementById("errorMessage").innerText = data.message;
+                    document.getElementById("errorMessage").style.display = "block";
+                    document.getElementById("successMessage").style.display = "none";
+                }
+            })
+            .catch(error => {
+                console.error("Lỗi:", error);
+                document.getElementById("errorMessage").innerText = "Không thể gửi dữ liệu. Vui lòng thử lại!";
+                document.getElementById("errorMessage").style.display = "block";
+                document.getElementById("successMessage").style.display = "none";
+            });
+    });
+</script>
+

@@ -1,6 +1,7 @@
 ﻿using RoomRentalBank.Models;
 using RoomRentalBank.Interfaces;
 using RoomRentalBank.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace RoomRentalBank.Services
 {

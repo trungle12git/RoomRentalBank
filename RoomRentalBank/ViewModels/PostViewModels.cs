@@ -32,7 +32,7 @@ namespace RoomRentalBank.ViewModels
         [Required]
         public decimal Area { get; set; }
 
-        public string? Status { get; set; }
+        public int Status { get; set; }
 
         public int EawCharge { get; set; } 
 
@@ -56,7 +56,7 @@ namespace RoomRentalBank.ViewModels
 
         public decimal Area { get; set; }
 
-        public string? Status { get; set; }
+        public int Status { get; set; }
 
         public int EawCharge { get; set; } // Trạng thái bài đăng
 

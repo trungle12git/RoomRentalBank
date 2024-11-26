@@ -28,7 +28,7 @@ namespace RoomRentalBank.Services
                 Password = registerModel.Password,
                 PhoneNumber = registerModel.PhoneNumber
             };
-            return await _userRepository.RegisterAsync(user);
+            return await _userRepository.CreateUserAsync(user);
         }
 
         //Quan ly tai khoan

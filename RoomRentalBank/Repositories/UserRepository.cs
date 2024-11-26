@@ -64,7 +64,7 @@ namespace RoomRentalBank.Repositories
             return await _context.Users.AnyAsync(u => u.Username == username);
         }
 
-        public async Task<bool> RegisterAsync(User user)
+        public async Task<bool> CreateUserAsync(User user)
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();

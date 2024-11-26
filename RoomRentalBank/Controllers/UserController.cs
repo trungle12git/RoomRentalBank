@@ -22,20 +22,48 @@ namespace RoomRentalBank.Controllers
         {
             _userService = userService;
         }
-
-        /// <summary>
-        /// Đăng nhập người dùng.
-        /// </summary>
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] UserLoginViewModel loginModel)
+        [HttpGet]
+        public IActionResult Login()
         {
-            var user = await _userService.AuthenticateAsync(loginModel.Username, loginModel.Password);
-            if (user == null)
-                return Unauthorized("Tên đăng nhập hoặc mật khẩu không đúng.");
-
-            return Ok(user);
+            return View(); // Hiển thị form đăng nhập
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            var user = await _userService.AuthenticateAsync(username, password);
+            if (user != null)
+            {
+                HttpContext.Session.SetInt32("UserId", user.UserId);
+                return RedirectToAction("Index", "Post");
+            }
 
+            ViewBag.Error = "Tên đăng nhập hoặc mật khẩu không đúng.";
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(UserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var usernameExists = await _userService.(model.Username);
+                if (usernameExists)
+                {
+                    ViewBag.Error = "Tên đăng nhập đã tồn tại.";
+                    return View(model);
+                }
+
+                await _userService.RegisterAsync(model);
+                return RedirectToAction("Login");
+            }
+            return View(model);
+        }
     }
 }

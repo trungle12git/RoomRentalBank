@@ -1,21 +1,29 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RoomRentalBank.Models;
+using RoomRentalBank.Interfaces;
+using RoomRentalBank.Services;
 using System.Diagnostics;
+using RoomRentalBank.ViewModels;
 
 namespace RoomRentalBank.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly PostService _postService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, PostService postService)
         {
             _logger = logger;
+            _postService = postService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var posts = await _postService.GetAllPostsAsync();
+            
+            return View(posts);
         }
 
         public IActionResult Privacy()

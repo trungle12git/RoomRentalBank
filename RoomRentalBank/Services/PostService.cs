@@ -51,5 +51,10 @@ namespace RoomRentalBank.Services
             await _postRepository.DeletePostAsync(postId);
             return true;
         }
+
+        public async Task<IEnumerable<Post>> GetAllPostsAsync()
+        {
+            return await _postRepository.GetAllPostsAsync();
+        }
     }
 }

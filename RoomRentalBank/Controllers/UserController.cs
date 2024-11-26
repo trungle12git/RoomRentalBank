@@ -49,12 +49,12 @@ namespace RoomRentalBank.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(UserViewModel model)
+        public async Task<IActionResult> Register(UserRegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var usernameExists = await _userService.(model.Username);
-                if (usernameExists)
+                var usernameExists = await _userService.GetUserByUsernameAsync(model.Username);
+                if (usernameExists != null)
                 {
                     ViewBag.Error = "Tên đăng nhập đã tồn tại.";
                     return View(model);

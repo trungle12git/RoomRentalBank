@@ -4,6 +4,17 @@ using System;
 
 namespace RoomRentalBank.ViewModels
 {
+    public class PostViewModel
+    {
+        public int PostId { get; set; }
+        public required string Address { get; set; }
+        public decimal Area { get; set; }
+        public int Price { get; set; }
+        public string? ImageUrls { get; set; }
+        public DateTime CreateDate { get; set; }
+        public required UserUpdateViewModel UserUpdate { get; set; }
+    }
+
     public class PostCreateViewModel
     {
         public int UserId { get; set; }

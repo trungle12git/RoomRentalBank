@@ -33,10 +33,10 @@
                             <p class="card-title">@post.Description</p>
                             <div class="card-group">
                                 <ul class="card-details">
-                                    <li class="card-area"><i class="fa-solid fa-chart-area"></i> Diện tích: @post.Area m²</li>
-                                    <li class="card-price"><i class="fas fa-money-bill-wave"></i> Giá phòng: @String.Format("{0:N0} ₫", post.Price)</li>
-                                    <li class="card-phone"><i class="fa-solid fa-phone"></i> Liên hệ: @post.User?.PhoneNumber</li>
-                                    <li class="card-address"><i class="fas fa-map-marker-alt"></i> Địa chỉ: @post.Address</li>
+                                    <li class="card-area"><i class="fa-solid fa-chart-area"></i> Diện tích: <span class="card-area-text">@post.Area m²</span></li>
+                                    <li class="card-price"><i class="fas fa-money-bill-wave"></i> Giá phòng: <span class="card-price-text">@String.Format("{0:N0} ₫", post.Price)</span></li>
+                                    <li class="card-phone"><i class="fa-solid fa-phone"></i> <span>Liên hệ: @post.User?.PhoneNumber</span></li>
+                                    <li class="card-address"><i class="fas fa-map-marker-alt"></i> Địa chỉ: <span class="card-address-text">@post.Address</span></li>
                                 </ul>
                                 <p class="card-time"><i class="fas fa-clock"></i> Thời gian đăng: @post.CreationDate.ToString("dd/MM/yyyy HH:mm:ss")</p>
                                 <p class="card-user"><i class="fas fa-user"></i> Người đăng: <strong>@post.User?.Username</strong></p>

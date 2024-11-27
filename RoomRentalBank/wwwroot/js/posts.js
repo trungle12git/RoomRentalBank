@@ -49,8 +49,12 @@
                     notification.innerText = "Bài đăng đã được cập nhật!";
                     notification.style.display = "block";
 
-                    // Làm mới trang
-                    setTimeout(() => window.location.reload(), 1000);
+                    document.getElementById("editModal").style.display = "none";
+                    updatePostInView(postId, updatedData);
+
+                    setTimeout(() => {
+                        notification.style.display = "none";
+                    }, 2000); 
                 } else {
                     notification.innerText = data.message;
                     notification.classList.add("error");
@@ -68,11 +72,17 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
+                        // Thông báo xóa thành công
                         notification.innerText = "Bài đăng đã được xóa!";
                         notification.style.display = "block";
 
-                        // Làm mới trang
-                        setTimeout(() => window.location.reload(), 1000);
+                        // Xóa phần tử bài đăng khỏi DOM
+                        const postCard = e.target.closest('.card');
+                        postCard.remove();
+
+                        setTimeout(() => {
+                            notification.style.display = "none";
+                        }, 2000); 
                     } else {
                         notification.innerText = data.message;
                         notification.classList.add("error");
@@ -82,10 +92,29 @@
         });
     });
 
+
     // Đóng modal
     closeModal.addEventListener("click", () => {
         editModal.style.display = "none";
     });
+
+    function updatePostInView(postId, updatedData) {
+        // Tìm phần tử bài đăng có postId
+        const postCard = document.querySelector(`[data-post-id='${postId}']`);
+        const postPrice = updatedData.Price;
+        const formattedPrice = postPrice.toLocaleString('vi-VN') + ' ₫'; 
+
+        if (postCard) {
+            console.log(updatedData);
+            
+        }
+
+        // Cập nhật các giá trị mới vào giao diện
+        postCard.querySelector('.card-address-text').innerText = updatedData.Address;
+        postCard.querySelector('.card-price-text').innerText = formattedPrice;
+        postCard.querySelector('.card-title').innerText = updatedData.Description;
+        postCard.querySelector('.card-area-text').textContent = updatedData.Area;
+    }
 });
 
 function updatePost(postId) {

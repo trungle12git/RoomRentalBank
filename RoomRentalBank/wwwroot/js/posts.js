@@ -12,7 +12,6 @@
             fetch(`/Post/GetPostById/${postId}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
                     document.getElementById("editPostId").value = data.postId;
                     document.getElementById("editAddress").value = data.address;
                     document.getElementById("editPrice").value = data.price;
@@ -117,35 +116,35 @@
     }
 });
 
-function updatePost(postId) {
-    const updatedPost = {
-        Address: document.getElementById("editAddress").value,
-        Price: parseFloat(document.getElementById("editPrice").value),
-        Description: document.getElementById("editDescription").value,
-        Area: parseFloat(document.getElementById("editArea").value),
-        ImageUrls: document.getElementById("editImageUrls").value
-    };
+//function updatePost(postId) {
+//    const updatedPost = {
+//        Address: document.getElementById("editAddress").value,
+//        Price: parseFloat(document.getElementById("editPrice").value),
+//        Description: document.getElementById("editDescription").value,
+//        Area: parseFloat(document.getElementById("editArea").value),
+//        ImageUrls: document.getElementById("editImageUrls").value
+//    };
 
-    fetch(`/Post/UpdatePost/${postId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedPost)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload(); // Refresh lại trang sau khi cập nhật
-            } else {
-                alert("Cập nhật thất bại: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error("Lỗi:", error);
-            alert("Không thể gửi yêu cầu. Vui lòng thử lại!");
-        });
-}
+//    fetch(`/Post/UpdatePost/${postId}`, {
+//        method: 'PUT',
+//        headers: {
+//            'Content-Type': 'application/json'
+//        },
+//        body: JSON.stringify(updatedPost)
+//    })
+//        .then(response => response.json())
+//        .then(data => {
+//            if (data.success) {
+//                alert(data.message);
+//                location.reload(); // Refresh lại trang sau khi cập nhật
+//            } else {
+//                alert("Cập nhật thất bại: " + data.message);
+//            }
+//        })
+//        .catch(error => {
+//            console.error("Lỗi:", error);
+//            alert("Không thể gửi yêu cầu. Vui lòng thử lại!");
+//        });
+//}
 
 

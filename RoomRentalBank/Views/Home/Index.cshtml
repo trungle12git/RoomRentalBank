@@ -22,9 +22,11 @@
             }
             else
             {
-                @foreach (var post in Model)
+                @foreach (var post in Model.Reverse())
                 {
-                    <div class="card">
+                    <div class="card" data-post-id="@post.PostId">
+                        <button class="card-edit" data-post-id="@post.PostId">Sửa</button>
+                        <button class="card-delete" data-post-id="@post.PostId">Xoá</button>
                         <img src="@post.ImageUrls" alt="Ảnh phòng trọ" class="card-image">
                         <h3 class="card-info">Nhà trọ & phòng trọ</h3>
                         <div class="card-content">
@@ -45,6 +47,34 @@
             }
         </div>
     </div>
+    <div id="editModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h3>Sửa bài đăng</h3>
+            <form id="editForm">
+                <input type="hidden" id="editPostId" />
+                <div>
+                    <label for="editAddress">Địa chỉ:</label>
+                    <input type="text" id="editAddress" name="Address"/>
+                </div>
+                <div>
+                    <label for="editPrice">Giá phòng:</label>
+                    <input type="number" id="editPrice" name="Price"/>
+                </div>
+                <div>
+                    <label for="editDescription">Mô tả:</label>
+                    <textarea id="editDescription" name="Description"></textarea>
+                </div>
+                <div>
+                    <label for="editArea">Diện tích:</label>
+                    <input type="number" step="0.001" id="editArea" name="Area"/>
+                </div>
+                <button type="submit">Lưu thay đổi</button>
+            </form>
+        </div>
+    </div>
+    <div id="notification" class="notification" style="display:none;"></div>
+    <script src="~/js/posts.js"></script>
 </body>
 </html>
 

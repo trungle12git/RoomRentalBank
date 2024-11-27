@@ -18,7 +18,7 @@ namespace RoomRentalBank.Interfaces
         Task AddPostAsync(Post post);
 
         // Cập nhật bài đăng (sử dụng ViewModel)
-        Task UpdatePostAsync(Post post, PostUpdateViewModel viewModel);
+        Task UpdatePostAsync(Post post);
 
         // Xóa bài đăng
         Task DeletePostAsync(int postId);

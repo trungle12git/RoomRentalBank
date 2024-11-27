@@ -32,13 +32,16 @@ namespace RoomRentalBank.Services
         }
 
         // Cập nhật bài đăng
-        public async Task<bool> UpdatePostAsync(int postId, PostUpdateViewModel viewModel)
+        public async Task<bool> UpdatePostAsync(int postId, Post post)
         {
-            var post = await _postRepository.GetPostByIdAsync(postId);
-            if (post == null)
+            var existingPost = await _postRepository.GetPostByIdAsync(postId);
+            if (existingPost == null)
                 return false;
 
-            await _postRepository.UpdatePostAsync(post, viewModel);
+            // Cập nhật thông tin bài đăng
+            post.PostId = postId;
+            post.UpdationDate = DateTime.Now;
+            await _postRepository.UpdatePostAsync(post);
             return true;
         }
 

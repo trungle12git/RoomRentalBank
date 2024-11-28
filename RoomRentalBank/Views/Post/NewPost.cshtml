@@ -49,7 +49,7 @@
 
 <script>
     document.getElementById("postForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Ngăn chặn form gửi đi mặc định.
+        e.preventDefault();
 
         const postData = {
             Address: document.getElementById("address").value,
@@ -64,7 +64,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(postData) // Serialize object thành JSON
+            body: JSON.stringify(postData)
         })
             .then(response => response.json())
             .then(data => {
